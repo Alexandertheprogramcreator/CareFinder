@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Find the care that you deserve.</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--text:#18212f;--muted:#5b6678;--line:#dde3ec;--brand:#0b6bcb;--brand-t:#fff;--red:#c62828;--red-bg:#fdecec;--amber:#8a5a00;--amber-bg:#fff4dc;--green:#1b6e3a;--green-bg:#e6f5ec;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1520;--card:#18212f;--text:#e8edf5;--muted:#9aa7bb;--line:#2b384c;--brand:#4da3ff;--brand-t:#06101e;--red:#ff8a80;--red-bg:#3a1a1a;--amber:#ffd27a;--amber-bg:#3a2e12;--green:#7fd9a0;--green-bg:#12301f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1520;--card:#18212f;--text:#e8edf5;--muted:#9aa7bb;--line:#2b384c;--brand:#4da3ff;--brand-t:#06101e;--red:#ff8a80;--red-bg:#3a1a1a;--amber:#ffd27a;--amber-bg:#3a2e12;--green:#7fd9a0;--green-bg:#12301f;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 48px}
+.sos{background:var(--red-bg);color:var(--red);border:1px solid var(--red);border-radius:12px;padding:12px 14px;font-weight:600;margin-bottom:20px}
+.sos a{color:inherit}
+h1{font-size:1.8rem;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 20px}
+.search{display:grid;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+label{font-size:.85rem;font-weight:600;color:var(--muted)}
+input{width:100%;padding:12px;font-size:1rem;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text)}
+input:focus{outline:2px solid var(--brand);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end}
+button,.btn{cursor:pointer;border:0;border-radius:10px;padding:12px 16px;font:600 1rem inherit;background:var(--brand);color:var(--brand-t);text-decoration:none;display:inline-block;text-align:center;transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s ease;transform-origin:center}
+button:hover,.btn:hover{transform:scale(1.08) translateY(-2px);box-shadow:0 8px 18px rgba(11,107,203,.22)}
+@media (prefers-reduced-motion:reduce){button,.btn{transition:none}button:hover,.btn:hover{transform:none}}
+button.ghost,.btn.ghost{background:transparent;color:var(--brand);border:1px solid var(--brand)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+.chip{background:var(--card);border:1px solid var(--line);color:var(--text);padding:6px 12px;border-radius:99px;font-size:.9rem;font-weight:500}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:16px}
+.badge{display:inline-block;font-size:.8rem;font-weight:700;padding:3px 10px;border-radius:99px}
+.b-red{background:var(--red-bg);color:var(--red)}.b-amber{background:var(--amber-bg);color:var(--amber)}.b-green{background:var(--green-bg);color:var(--green)}
+h2{margin:8px 0 6px;font-size:1.25rem}h3{margin:16px 0 6px;font-size:1rem}
+ul{margin:4px 0 0;padding-left:20px}
+.facs{display:grid;gap:10px;margin-top:10px}
+.fac{border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+.fac small{color:var(--muted);display:block}
+.note{font-size:.85rem;color:var(--muted);margin-top:20px}
+.hint{color:var(--muted);font-size:.9rem;margin:6px 0 0}
+.tabs{display:flex;gap:8px;margin:0 0 16px;border-bottom:1px solid var(--line)}
+.tabs button{border-radius:10px 10px 0 0;margin-bottom:-1px}
+.tabs button[aria-selected="false"]{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.tab-panel-enter{animation:tab-panel-in .38s cubic-bezier(.2,.75,.25,1) both}
+.tab-panel-exit{animation:tab-panel-out .22s ease both;pointer-events:none}
+@keyframes tab-panel-in{from{opacity:0;transform:translateY(12px) scale(.985);filter:blur(3px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@keyframes tab-panel-out{to{opacity:0;transform:translateY(-6px) scale(.99);filter:blur(2px)}}
+@media (prefers-reduced-motion:reduce){.tab-panel-enter,.tab-panel-exit{animation:none}}
+.about{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.about p{margin:0 0 16px}.about p:last-child{margin-bottom:0}
+.home{min-height:300px;display:grid;place-items:center;padding:40px 20px;text-align:center;background:linear-gradient(135deg,var(--card),var(--bg));border:1px solid var(--line);border-radius:16px}
+.home h2{font-size:clamp(2rem,8vw,3.5rem);line-height:1.15;margin:0 0 24px}
+.home .script{display:block;color:var(--brand);font-family:"Brush Script MT","Segoe Script",cursive;font-size:1.2em;font-weight:500;opacity:0;animation:reimagined-fade-in .8s ease 1s forwards}
+@keyframes reimagined-fade-in{to{opacity:1}}
+.word-window{display:inline-block;height:1.2em;overflow:hidden;vertical-align:bottom}
+.word-track{display:block;line-height:1.2em;transition:transform .6s cubic-bezier(.22,.8,.25,1)}
+.word-track span{display:block;height:1.2em}
+@media (prefers-reduced-motion:reduce){.word-track{transition:none}.home .script{opacity:1;animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sos">Life-threatening emergency? Call <a href="tel:911">911</a> (or your local emergency number) now – don’t waste time.</div>
+  <h1>CareFinder</h1>
+  <p class="sub">Type a symptom, illness or condition to see what kind of facility fits – then find the closest ones on a map.</p>
+
+  <nav class="tabs" role="tablist" aria-label="CareFinder sections">
+    <button id="home-tab" type="button" role="tab" aria-selected="true" aria-controls="home-panel">Home</button>
+    <button id="finder-tab" type="button" role="tab" aria-selected="false" aria-controls="finder-panel" tabindex="-1">Find Care</button>
+    <button id="about-tab" type="button" role="tab" aria-selected="false" aria-controls="about-panel" tabindex="-1">About Us</button>
+  </nav>
+
+  <section id="home-panel" class="home tab-panel" role="tabpanel" aria-labelledby="home-tab">
+    <div>
+      <h2><span id="rotating-word" class="word-window" aria-label="Medical"><span class="word-track" aria-hidden="true"><span>Medical</span><span>Dental</span><span>Mental</span><span>Physical</span><span>Medical</span></span></span> help <span class="script">reimagined</span></h2>
+      <button id="start-finding" type="button">Find care</button>
+    </div>
+  </section>
+  <section id="finder-panel" class="tab-panel" role="tabpanel" aria-labelledby="finder-tab" hidden>
+  <div class="search">
+    <div class="row">
+      <div><label for="q">Sickness, disease or symptom</label>
+        <input id="q" list="dl" placeholder="Example: chest pain, broken arm, asthma attack" autocomplete="off"></div>
+      <button id="go">Search</button>
+    </div>
+    <div class="row">
+      <div><label for="loc">Your location (optional)</label>
+        <input id="loc" placeholder="City, ZIP or address – blank = near me"></div>
+      <button class="ghost" id="geo" type="button"> Use My Location</button>
+    </div>
+    <datalist id="dl"></datalist>
+  </div>
+  <div class="chips" id="chips"></div>
+  <div id="out"></div>
+  <p class="note">CareFinder gives general guidance only and is not medical advice or a diagnosis. Facility results open in your map app, so they reflect live hours and distance there. Always call emergency services if you think a life is at risk.</p>
+  </section>
+  <section id="about-panel" class="about tab-panel" role="tabpanel" aria-labelledby="about-tab" hidden>
+    <h2>About Us</h2>
+    <p>We are constantly working on updating our databases to help keep CareFinder’s information current.</p>
+    <p><strong>Developer:</strong> Alexander Sanders</p>
+    <p><strong>Medical researcher:</strong> Mikail Boztepe</p>
+  </section>
+</div>
+
+<script>
+const C=[
+{n:"Chest pain / heart attack",k:["chest pain","heart attack","cardiac","angina","palpitations","heart"],u:"red",t:"Emergency room with cardiac care",s:["emergency room with cardiac center","hospital cardiac cath lab"],w:["Pressure or squeezing in the chest","Pain spreading to arm, jaw or back","Shortness of breath, sweating, nausea"],a:"Call 911. Chew an aspirin only if not allergic and told to by the dispatcher."},
+{n:"Stroke",k:["stroke","face drooping","slurred speech","tia","sudden weakness"],u:"red",t:"Certified stroke center ER",s:["stroke center hospital","emergency room"],w:["Face drooping, arm weakness, speech difficulty","Sudden confusion, vision loss or severe headache"],a:"Call 911 immediately – every minute matters. Note the time symptoms began."},
+{n:"Difficulty breathing / asthma attack",k:["asthma","breathing","shortness of breath","copd","wheezing","pneumonia","can't breathe"],u:"red",t:"Emergency room",s:["emergency room"],w:["Struggling to speak full sentences","Blue lips, rescue inhaler not helping"],a:"Use your rescue inhaler as prescribed and call 911 if there’s no quick relief."},
+{n:"Broken bone / fracture",k:["fracture","broken","broken arm","broken leg","sprain","dislocation","bone"],u:"amber",t:"ER or urgent care with X-ray",s:["emergency room","urgent care with x-ray"],w:["Visible deformity or bone through the skin (call 911)","Numb, blue or cold limb"],a:"Immobilize the area and avoid moving it. Ice wrapped in cloth helps with swelling."},
+{n:"Severe injury / trauma / major bleeding",k:["trauma","accident","car crash","bleeding","gunshot","stab","head injury","concussion"],u:"red",t:"Trauma center",s:["trauma center hospital","emergency room"],w:["Bleeding that won’t stop","Loss of consciousness, vomiting after head injury"],a:"Call 911 and apply firm direct pressure to bleeding wounds."},
+{n:"Burns",k:["burn","burns","scald"],u:"amber",t:"ER; burn center for severe burns",s:["burn center hospital","emergency room"],w:["Large, deep, or on face/hands/genitals","Charred or white leathery skin"],a:"Cool with running water 20 minutes. Don’t use ice, butter or ointments."},
+{n:"Allergic reaction / anaphylaxis",k:["allergy","allergic","anaphylaxis","hives","bee sting","swelling throat"],u:"red",t:"Emergency room",s:["emergency room"],w:["Swelling of lips, tongue or throat","Wheezing, dizziness, widespread hives"],a:"Use an epinephrine auto-injector if you have one, then call 911."},
+{n:"Poisoning / overdose",k:["poison","overdose","ingested","toxic","medication overdose"],u:"red",t:"Emergency room with toxicology",s:["emergency room"],w:["Drowsiness, vomiting, seizures","Unknown substance swallowed"],a:"Call Poison Control (1-800-222-1222 in the US) or 911 right away."},
+{n:"Appendicitis / severe abdominal pain",k:["appendicitis","abdominal pain","stomach pain","belly pain","gallbladder","kidney stone","pancreatitis"],u:"red",t:"Emergency room",s:["emergency room"],w:["Pain moving to lower right abdomen","Fever, vomiting, rigid belly"],a:"Don’t eat or drink while you head to the ER – surgery may be needed."},
+{n:"Pregnancy emergency / labor",k:["pregnancy","labor","contractions","preeclampsia","miscarriage","pregnant","bleeding pregnant"],u:"red",t:"Hospital with labor & delivery",s:["hospital labor and delivery","emergency room obstetrics"],w:["Regular contractions, water breaking","Heavy bleeding, severe headache or vision changes"],a:"Call your OB provider and go to the hospital where you plan to deliver, or 911 if urgent."},
+{n:"Seizure",k:["seizure","epilepsy","convulsion"],u:"red",t:"Emergency room with neurology",s:["emergency room","hospital neurology"],w:["Seizure over 5 minutes or repeated","Injury, first-ever seizure, trouble breathing"],a:"Keep the person safe on their side. Don’t put anything in their mouth. Call 911."},
+{n:"Diabetic emergency",k:["diabetes","diabetic","low blood sugar","hypoglycemia","dka","high blood sugar"],u:"red",t:"Emergency room",s:["emergency room","hospital endocrinology"],w:["Confusion, fainting, fruity breath","Vomiting with very high glucose"],a:"If conscious and low, give fast sugar (juice). Call 911 if no improvement."},
+{n:"Mental health crisis / suicidal thoughts",k:["suicide","suicidal","self harm","depression crisis","panic attack","psychosis","mental health","anxiety"],u:"red",t:"Psychiatric ER / crisis center",s:["psychiatric emergency room","behavioral health crisis center"],w:["Thoughts of harming yourself or others","Severe agitation or hallucinations"],a:"In the US call or text 988 (Suicide & Crisis Lifeline) any time, or call 911."},
+{n:"Eye injury",k:["eye","eye injury","vision loss","chemical in eye","pink eye"],u:"amber",t:"ER with ophthalmology",s:["eye emergency hospital","emergency room"],w:["Sudden vision loss, chemical splash","Object stuck in eye"],a:"Rinse chemical exposures with water for 15+ minutes. Don’t rub the eye."},
+{n:"Flu / COVID / high fever",k:["flu","influenza","covid","coronavirus","fever","cold","sore throat","strep"],u:"green",t:"Urgent care or primary care",s:["urgent care","walk-in clinic"],w:["Fever above 103°F, confusion, trouble breathing → ER","Infants under 3 months with any fever → ER"],a:"Rest and fluids. Seek urgent care for testing and antivirals if early."},
+{n:"Cuts needing stitches",k:["cut","laceration","stitches","wound","animal bite","dog bite"],u:"amber",t:"Urgent care or ER",s:["urgent care","emergency room"],w:["Deep or gaping wound, won’t stop bleeding","Bite from an animal"],a:"Apply pressure and rinse gently. Get stitches within ~8 hours if possible."},
+{n:"Cancer care",k:["cancer","tumor","chemo","leukemia","lymphoma","oncology"],u:"green",t:"Cancer center / hospital oncology",s:["cancer center","hospital oncology"],w:["New fever during chemo → ER","Uncontrolled pain or bleeding"],a:"Ask your doctor for referral to an NCI-designated or accredited cancer center."},
+{n:"Dehydration / food poisoning / stomach flu",k:["dehydration","vomiting","diarrhea","food poisoning","gastro","norovirus"],u:"amber",t:"Urgent care; ER if severe",s:["urgent care","emergency room"],w:["Can’t keep fluids down >24h","Blood in stool, severe weakness, dizziness"],a:"Sip oral rehydration fluids in small amounts."},
+{n:"Infection / sepsis",k:["sepsis","infection","abscess","cellulitis","uti","urinary"],u:"amber",t:"Urgent care; ER if severe",s:["urgent care","emergency room"],w:["Fever with confusion or fast heartbeat → ER","Red streaks spreading from a wound"],a:"Sepsis is an emergency – go to the ER if you suspect it."},
+{n:"Child / pediatric emergency",k:["child","baby","infant","toddler","pediatric","kid"],u:"amber",t:"Children’s hospital or pediatric ER",s:["children's hospital emergency room","pediatric urgent care"],w:["Infant under 3 months with fever","Lethargy, dehydration, breathing difficulty"],a:"Go to a pediatric ER when possible; call 911 for severe symptoms."},
+{n:"Dental emergency",k:["tooth","dental","toothache","abscess tooth","jaw"],u:"amber",t:"Emergency dentist (ER if swelling spreads)",s:["emergency dentist","emergency room"],w:["Facial swelling or trouble swallowing → ER","Knocked-out tooth: keep in milk, see dentist within 1 hour"],a:"Rinse with warm salt water; don’t put aspirin on the gum."},
+{n:"Migraine / severe headache",k:["headache","migraine","thunderclap"],u:"amber",t:"Urgent care; ER if sudden or severe",s:["urgent care","emergency room"],w:["Worst headache of your life, sudden onset","With fever, stiff neck, confusion, weakness"],a:"Seek ER care for a sudden severe headache."}
+];
+const $=id=>document.getElementById(id);
+const rotatingWord=$("rotating-word");
+const rotatingWords=["Medical","Dental","Mental","Physical"];
+let rotatingWordIndex=0;
+window.setInterval(()=>{
+  rotatingWordIndex=(rotatingWordIndex+1)%rotatingWords.length;
+  rotatingWord.setAttribute("aria-label",rotatingWords[rotatingWordIndex]);
+  rotatingWord.querySelector(".word-track").style.transform=`translateY(-${rotatingWordIndex*1.2}em)`;
+},3000);
+const tabs=[$("home-tab"),$("finder-tab"),$("about-tab")];
+const tabPanels=tabs.map(tab=>$(tab.getAttribute("aria-controls")));
+tabPanels.forEach(panel=>panel.addEventListener("animationend",event=>{
+  if(event.animationName==="tab-panel-out"&&panel.classList.contains("tab-panel-exit")&&
+     $(panel.getAttribute("aria-labelledby")).getAttribute("aria-selected")!=="true"){
+    panel.hidden=true;
+    panel.classList.remove("tab-panel-exit");
+  }
+}));
+function activateTab(tab){
+  const currentTab=tabs.find(t=>t.getAttribute("aria-selected")==="true");
+  const currentPanel=currentTab&&$(currentTab.getAttribute("aria-controls"));
+  const targetPanel=$(tab.getAttribute("aria-controls"));
+  tabs.forEach(t=>{
+    const selected=t===tab;
+    t.setAttribute("aria-selected",String(selected));
+    t.tabIndex=selected?0:-1;
+  });
+  if(currentPanel===targetPanel)return;
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    tabPanels.forEach(panel=>{
+      panel.hidden=panel!==targetPanel;
+      panel.classList.remove("tab-panel-enter","tab-panel-exit");
+    });
+    return;
+  }
+  if(currentPanel){
+    currentPanel.classList.remove("tab-panel-enter");
+    currentPanel.classList.add("tab-panel-exit");
+  }
+  targetPanel.hidden=false;
+  targetPanel.classList.remove("tab-panel-exit","tab-panel-enter");
+  void targetPanel.offsetWidth;
+  targetPanel.classList.add("tab-panel-enter");
+}
+tabs.forEach((tab,index)=>{
+  tab.addEventListener("click",()=>activateTab(tab));
+  tab.addEventListener("keydown",event=>{
+    if(event.key==="ArrowRight"||event.key==="ArrowLeft"||event.key==="Home"||event.key==="End"){
+      event.preventDefault();
+      const next=event.key==="Home"?0:event.key==="End"?tabs.length-1:(index+(event.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length;
+      tabs[next].focus();
+      activateTab(tabs[next]);
+    }
+  });
+});
+$("start-finding").addEventListener("click",()=>activateTab($("finder-tab")));
+const UL={red:["b-red","Possible emergency – go to ER / call 911"],amber:["b-amber","Needs prompt care today"],green:["b-green","Usually non-emergency"]};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let coords=null;
+$("dl").innerHTML=C.map(c=>`<option value="${esc(c.n)}">`).join("");
+$("chips").innerHTML=["Chest pain","Broken arm","Asthma","Stroke","Burn","Flu"].map(t=>`<button class="chip" type="button">${t}</button>`).join("");
+$("chips").onclick=e=>{if(e.target.classList.contains("chip")){$("q").value=e.target.textContent;run()}};
+function match(q){
+  q=q.toLowerCase().trim();if(!q)return null;
+  let best=null,sc=0;
+  C.forEach(c=>{let s=0;
+    if(c.n.toLowerCase().includes(q))s+=5;
+    c.k.forEach(k=>{if(q===k)s+=10;else if(q.includes(k)||k.includes(q))s+=4;});
+    q.split(/\s+/).forEach(w=>{if(w.length>2&&(c.k.join(" ")+" "+c.n.toLowerCase()).includes(w))s+=1;});
+    if(s>sc){sc=s;best=c}});
+  return best;
+}
+function mapUrl(term,kind){
+  const where=coords?"":($("loc").value.trim()?" near "+$("loc").value.trim():" near me");
+  const q=encodeURIComponent(term+where);
+  if(kind==="apple")return "https://maps.apple.com/?q="+q+(coords?`&sll=${coords}`:"");
+  return coords?`https://www.google.com/maps/search/${encodeURIComponent(term)}/@${coords},13z`:`https://www.google.com/maps/search/${q}`;
+}
+function render(c,raw){
+  const m=c||{n:"General care search",u:"amber",t:"Emergency room or urgent care",s:["emergency room","urgent care"],w:["Trouble breathing, chest pain, confusion, severe bleeding → call 911"],a:"We didn’t recognise “"+esc(raw)+"”. If you’re unsure how serious it is, go to the nearest ER or call a nurse line."};
+  const [bc,bt]=UL[m.u];
+  $("out").innerHTML=`<div class="card"><span class="badge ${bc}">${bt}</span>
+  <h2>${esc(m.n)}</h2><p><strong>Best place to go:</strong> ${esc(m.t)}</p>
+  <h3>Go to the ER / call 911 if you notice</h3><ul>${m.w.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+  <h3>What to do right now</h3><p>${esc(m.a)}</p>
+  <h3>Closest facilities</h3>
+  <div class="facs">${m.s.map(s=>`<div class="fac"><div><strong>${esc(s.charAt(0).toUpperCase()+s.slice(1))}</strong><small>${coords?"Near your detected location":($("loc").value.trim()?"Near "+esc($("loc").value.trim()):"Near your current location")}</small></div>
+  <span><a class="btn" target="_blank" rel="noopener" href="${mapUrl(s)}">Google Maps</a> <a class="btn ghost" target="_blank" rel="noopener" href="${mapUrl(s,"apple")}">Apple Maps</a></span></div>`).join("")}</div>
+  <p class="hint">Tip: check that the facility is open and call ahead for non-emergencies. In an emergency, an ambulance will take you to the right place.</p></div>`;
+  $("out").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function run(){const q=$("q").value.trim();if(!q){$("q").focus();return}render(match(q),q)}
+$("go").onclick=run;
+$("q").addEventListener("keydown",e=>{if(e.key==="Enter")run()});
+$("geo").onclick=()=>{
+  const b=$("geo");
+  if(!navigator.geolocation){b.textContent="Not supported";return}
+  b.textContent="Locating…";
+  navigator.geolocation.getCurrentPosition(p=>{coords=p.coords.latitude.toFixed(5)+","+p.coords.longitude.toFixed(5);$("loc").value="Using my current location";b.textContent="✓ Located";if($("q").value.trim())run()},
+  ()=>{b.textContent=" Use mine";alert("Couldn’t get your location. Type a city or ZIP instead, or leave blank to use “near me” in the map.")},{timeout:10000});
+};
+$("loc").addEventListener("input",()=>{coords=null;$("geo").textContent="📍 Use mine"});
+</script>
+</body>
+</html>
